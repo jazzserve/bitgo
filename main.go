@@ -12,9 +12,8 @@ import (
 )
 
 type BitGo struct {
-	Host  string
-	Token string
-
+	host  string
+	token string
 	coin string
 }
 
@@ -24,10 +23,21 @@ type ListParams struct {
 	AllTokens bool   `url:"allTokens,omitempty"`
 }
 
+func New(env string, token string) *BitGo {
+	switch env {
+		case "test": env = "https://test.bitgo.com/api/v2"
+		case "prod": env = "https://www.bitgo.com/api/v2"
+	}
+	return &BitGo{
+		host:  env,
+		token: token,
+	}
+}
+
 func (b *BitGo) clone() *BitGo {
 	return &BitGo{
-		Host:  b.Host,
-		Token: b.Token,
+		host:  b.host,
+		token: b.token,
 		coin:  b.coin,
 	}
 }
@@ -44,7 +54,7 @@ func (b *BitGo) get(url string, params interface{}, responce interface{}) (err e
 		url = url + "?" + v.Encode()
 	}
 
-	req, err := http.NewRequest(http.MethodGet, b.Host+"/"+url, nil)
+	req, err := http.NewRequest(http.MethodGet, b.host+"/"+url, nil)
 	if err != nil {
 		return
 	}
@@ -63,7 +73,7 @@ func (b *BitGo) modify(method string, url string, params interface{}, responce i
 		}
 	}
 
-	req, err := http.NewRequest(method, b.Host+"/"+url, body)
+	req, err := http.NewRequest(method, b.host+"/"+url, body)
 	if err != nil {
 		return
 	}
@@ -84,7 +94,7 @@ func (b *BitGo) put(url string, params interface{}, responce interface{}) (err e
 }
 
 func (b *BitGo) request(req *http.Request, responce interface{}) (err error) {
-	req.Header.Add("Authorization", "Bearer "+b.Token)
+	req.Header.Add("Authorization", "Bearer "+b.token)
 
 	client := &http.Client{
 		Timeout: time.Minute,

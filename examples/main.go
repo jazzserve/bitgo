@@ -7,10 +7,7 @@ import (
 )
 
 func main() {
-	b := &bitgo.BitGo{
-		Host:  "https://test.bitgo.com/api/v2",
-		Token: "{Access token}",
-	}
+	b := bitgo.New("test", "{Access token}")
 
 	list, err := b.Coin("tbtc").ListWallets(nil)
 	if err != nil {

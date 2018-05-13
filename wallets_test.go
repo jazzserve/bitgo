@@ -26,10 +26,7 @@ var (
 
 func init() {
 	rand.Seed(time.Now().UnixNano())
-	b = &BitGo{
-		Host:  "https://test.bitgo.com/api/v2",
-		Token: os.Getenv("BITGO_TOKEN"),
-	}
+	b = New("test", os.Getenv("BITGO_TOKEN"))
 	tbtc = b.Coin("tbtc")
 }
 

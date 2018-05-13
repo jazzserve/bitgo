@@ -22,12 +22,9 @@ View [API Documentation](https://www.bitgo.com/api/v2).
 
 ## List Wallets
 ```go
-b := &bitgo.BitGo{
-	Host:  "https://test.bitgo.com/api/v2",
-	Token: "{Access token}",
-}
+b := bitgo.New("prod", "{Access token}")
 
-list, err := b.Coin("tbtc").ListWallets(nil)
+list, err := b.Coin("btc").ListWallets(nil)
 if err != nil {
 	log.Fatal(err.Error())
 }
