@@ -33,21 +33,3 @@ for _, w := range list.Wallets {
 	log.Println(w.ID, w.Label)
 }
 ```
-
-# Development status
-
-| Section | Status | Test  |
-| --- | --- | --- |
-| Wallets | Done | 90% |
-| Wallet Operations Basic | 90% | TODO |
-| Wallet Operations Advanced | 10% | 10% |
-| Address Labels | TODO | TODO |
-| Blockchain Data | TODO | TODO |
-| Keychains | TODO | TODO |
-| Pending Approvals | TODO | TODO |
-| Tags | TODO | TODO |
-| Utilities | TODO | TODO |
-| Wallet Policy | TODO | TODO |
-| Wallet Sharing  | TODO | TODO |
-| Webhook Notifications | TODO | TODO |
-| User Authentication | TODO | TODO |
