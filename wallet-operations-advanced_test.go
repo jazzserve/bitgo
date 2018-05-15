@@ -7,7 +7,7 @@ import (
 // Get Total Balances
 
 func TestGetTotalBalances(t *testing.T) {
-	_, err := tbtc.GetTotalBalances()
+	_, err := coin.GetTotalBalances()
 	if err != nil {
 		t.Error(err.Error())
 		return

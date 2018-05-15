@@ -7,7 +7,7 @@ import (
 // List Wallets
 
 func TestListWallets(t *testing.T) {
-	_, err := tbtc.ListWallets(&ListParams{
+	_, err := coin.ListWallets(&ListParams{
 		Limit:     3,
 		AllTokens: true,
 	})
@@ -20,7 +20,7 @@ func TestListWallets(t *testing.T) {
 // Get Wallet
 
 func TestGetWallet(t *testing.T) {
-	_, err := tbtc.GetWallet(walletId, &GetWalletParams{
+	_, err := coin.GetWallet(walletId, &GetWalletParams{
 		AllTokens: true,
 	})
 	if err != nil {
@@ -34,7 +34,7 @@ func TestGetWallet(t *testing.T) {
 func TestUpdateWallet(t *testing.T) {
 	newLabel := randStringRunes(5)
 
-	wallet, err := tbtc.UpdateWallet(walletId, UpdateWalletParams{
+	wallet, err := coin.UpdateWallet(walletId, UpdateWalletParams{
 		Label: newLabel,
 	})
 	if err != nil {
@@ -50,7 +50,7 @@ func TestUpdateWallet(t *testing.T) {
 // Get Wallet By Address
 
 func TestGetWalletByAddress(t *testing.T) {
-	_, err := tbtc.GetWalletByAddress(address)
+	_, err := coin.GetWalletByAddress(address)
 	if err != nil {
 		t.Error(err.Error())
 		return

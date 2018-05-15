@@ -17,10 +17,12 @@ func randStringRunes(n int) string {
 }
 
 var (
-	b        *BitGo
-	tbtc     *BitGo
-	walletId string
-	address  string
+	b          *BitGo
+	coin       *BitGo
+	walletId   string
+	address    string
+	transferId string
+	sequenceId string
 )
 
 func init() {
@@ -28,10 +30,13 @@ func init() {
 
 	env := os.Getenv("ENV")
 	token := os.Getenv("TOKEN")
-	walletId = os.Getenv("WALLET")
+	coinCode := os.Getenv("COIN")
+
+	walletId = os.Getenv("WALLET_ID")
 	address = os.Getenv("ADDRESS")
-	coin := os.Getenv("COIN")
+	transferId = os.Getenv("TRANSFER_ID")
+	sequenceId = os.Getenv("SEQUENCE_ID")
 
 	b = New(env, token)
-	tbtc = b.Coin(coin)
+	coin = b.Coin(coinCode)
 }
