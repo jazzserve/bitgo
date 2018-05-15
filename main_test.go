@@ -30,7 +30,7 @@ func init() {
 	rand.Seed(time.Now().UnixNano())
 
 	env := os.Getenv("ENV")
-	token := os.Getenv("TOKEN")
+	token := os.Getenv("ACCESS_TOKEN")
 	coinCode := os.Getenv("COIN")
 
 	walletId = os.Getenv("WALLET_ID")
