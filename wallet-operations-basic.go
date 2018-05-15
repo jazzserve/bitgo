@@ -72,6 +72,11 @@ type Address struct {
 	} `json:"coinSpecific"`
 }
 
+type TransactionDescription struct {
+	Txid   string `json:"txid"`
+	Status string `json:"status"`
+}
+
 // List Wallet Transfers
 
 func (b *BitGo) ListWalletTransfers(walletId string, params *ListParams) (list TransferList, err error) {
@@ -159,7 +164,38 @@ func (b *BitGo) UpdateWalletAddress(walletId string, addressOrId string, params 
 
 // Send Transaction
 
-// TODO
+type SendParams struct {
+	Address          string `json:"address"`
+	Amount           int    `json:"amount"`
+	WalletPassphrase string `json:"walletPassphrase"`
+	Prv              string `json:"prv,omitempty"`
+	NumBlocks        int    `json:"numBlocks,omitempty"`
+	FeeRate          int    `json:"feeRate,omitempty"`
+	Comment          string `json:"comment,omitempty"`
+	//	Unspents                    array  `json:"unspents,omitempty"`
+	MinConfirms                 int    `json:"minConfirms,omitempty"`
+	EnforceMinConfirmsForChange bool   `json:"enforceMinConfirmsForChange,omitempty"`
+	TargetWalletUnspents        int    `json:"targetWalletUnspents,omitempty"`
+	NoSplitChange               bool   `json:"noSplitChange,omitempty"`
+	MinValue                    int    `json:"minValue,omitempty"`
+	MaxValue                    int    `json:"maxValue,omitempty"`
+	GasPrice                    int    `json:"gasPrice,omitempty"`
+	GasLimit                    int    `json:"gasLimit,omitempty"`
+	SequenceId                  int    `json:"sequenceId,omitempty"`
+	Segwit                      bool   `json:"segwit,omitempty"`
+	LastLedgerSequence          int    `json:"lastLedgerSequence,omitempty"`
+	LedgerSequenceDelta         string `json:"ledgerSequenceDelta,omitempty"`
+}
+
+func (b *BitGo) SendTransaction(walletId string, params SendParams) (transactionDescription TransactionDescription, err error) {
+	err = b.post(
+		fmt.Sprintf("%s/wallet/%s/sendcoins",
+			b.coin,
+			walletId),
+		params,
+		&transactionDescription)
+	return
+}
 
 // Send Transaction to Many
 
