@@ -17,6 +17,21 @@ func TestListWallets(t *testing.T) {
 	}
 }
 
+// Generate Wallet
+
+func TestGenerateWallet(t *testing.T) {
+	newLabel := randStringRunes(5)
+
+	_, err := coin.GenerateWallet(GenerateWalletParams{
+		Label:      newLabel,
+		Passphrase: passphrase,
+	})
+	if err != nil {
+		t.Error(err.Error())
+		return
+	}
+}
+
 // Get Wallet
 
 func TestGetWallet(t *testing.T) {

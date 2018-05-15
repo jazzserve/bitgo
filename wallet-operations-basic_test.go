@@ -80,14 +80,18 @@ func TestUpdateWalletAddress(t *testing.T) {
 
 // Send Transaction
 
-// TODO
-
-/*
-
 func TestSendTransaction(t *testing.T) {
-	_, err := coin.SendTransaction(walletId, SendParams{
+	err := b.Unlock(UnlockParams{
+		Otp: "0000000",
+	})
+	if err != nil {
+		t.Error(err.Error())
+		return
+	}
+
+	_, err = coin.SendTransaction(walletId, SendParams{
 		Address:          address,
-		Amount:           0.01 * 1e8,
+		Amount:           0.001 * 1e8,
 		WalletPassphrase: passphrase,
 	})
 	if err != nil {
@@ -95,8 +99,6 @@ func TestSendTransaction(t *testing.T) {
 		return
 	}
 }
-
-*/
 
 // Send Transaction to Many
 

@@ -156,7 +156,7 @@ type GenerateWalletParams struct {
 	PasscodeEncryptionCode          string `json:"passcodeEncryptionCode,omitempty"`
 }
 
-func (b *BitGo) GenerateWallet(params *GenerateWalletParams) (wallet GeneratedWallet, err error) {
+func (b *BitGo) GenerateWallet(params GenerateWalletParams) (wallet GeneratedWallet, err error) {
 	err = b.post(
 		fmt.Sprintf("%s/wallet/generate",
 			b.coin),

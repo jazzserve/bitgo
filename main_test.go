@@ -23,6 +23,7 @@ var (
 	address    string
 	transferId string
 	sequenceId string
+	passphrase string
 )
 
 func init() {
@@ -36,6 +37,7 @@ func init() {
 	address = os.Getenv("ADDRESS")
 	transferId = os.Getenv("TRANSFER_ID")
 	sequenceId = os.Getenv("SEQUENCE_ID")
+	passphrase = os.Getenv("PASSPHRASE")
 
 	b = New(env, token)
 	coin = b.Coin(coinCode)
