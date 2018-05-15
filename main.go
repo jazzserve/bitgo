@@ -3,7 +3,6 @@ package bitgo
 import (
 	"bytes"
 	"encoding/json"
-	"errors"
 	"io/ioutil"
 	"net/http"
 	"time"
@@ -14,7 +13,7 @@ import (
 type BitGo struct {
 	host  string
 	token string
-	coin string
+	coin  string
 }
 
 type ListParams struct {
@@ -25,8 +24,10 @@ type ListParams struct {
 
 func New(env string, token string) *BitGo {
 	switch env {
-		case "test": env = "https://test.bitgo.com/api/v2"
-		case "prod": env = "https://www.bitgo.com/api/v2"
+	case "test":
+		env = "https://test.bitgo.com/api/v2"
+	case "prod":
+		env = "https://www.bitgo.com/api/v2"
 	}
 	return &BitGo{
 		host:  env,
@@ -112,8 +113,14 @@ func (b *BitGo) request(req *http.Request, responce interface{}) (err error) {
 	}
 
 	if r.StatusCode != http.StatusOK {
-		err = errors.New(string(resp))
-		return
+		berr := Error{}
+
+		err = json.Unmarshal(resp, &berr)
+		if err != nil {
+			return err
+		}
+
+		return berr
 	}
 
 	err = json.Unmarshal(resp, &responce)
