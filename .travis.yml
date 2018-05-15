@@ -3,4 +3,4 @@
     - "1.10"
   before_install:
     - npm install bitgo
-    - ./node_modules/bitgo/bin/bitgo-express
+    - ./node_modules/bitgo/bin/bitgo-express &
