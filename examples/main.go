@@ -7,7 +7,10 @@ import (
 )
 
 func main() {
-	b := bitgo.New("test", "{Access token}")
+	b, err := bitgo.New("test", "{Access token}")
+	if err != nil {
+		log.Fatal(err.Error())
+	}
 
 	list, err := b.Coin("tbtc").ListWallets(nil)
 	if err != nil {

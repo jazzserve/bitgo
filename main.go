@@ -28,9 +28,6 @@ func New(env string, token string) (b *BitGo, err error) {
 	if env == "" {
 		return nil, errors.New("empty env")
 	}
-	if token == "" {
-		return nil, errors.New("empty token")
-	}
 	switch env {
 	case "test":
 		env = "https://test.bitgo.com/api/v2"
