@@ -7,9 +7,10 @@ import (
 // Get Total Balances
 
 func TestGetTotalBalances(t *testing.T) {
+	coin, _ := getTestCoin(t)
+
 	_, err := coin.GetTotalBalances()
 	if err != nil {
-		t.Error(err.Error())
-		return
+		t.Fatal(err.Error())
 	}
 }

@@ -3,6 +3,7 @@ package bitgo
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"io/ioutil"
 	"net/http"
 	"time"
@@ -23,7 +24,13 @@ type ListParams struct {
 	AllTokens bool   `url:"allTokens,omitempty"`
 }
 
-func New(env string, token string) *BitGo {
+func New(env string, token string) (b *BitGo, err error) {
+	if env == "" {
+		return nil, errors.New("empty env")
+	}
+	if token == "" {
+		return nil, errors.New("empty token")
+	}
 	switch env {
 	case "test":
 		env = "https://test.bitgo.com/api/v2"
@@ -33,7 +40,7 @@ func New(env string, token string) *BitGo {
 	return &BitGo{
 		host:  env,
 		token: token,
-	}
+	}, nil
 }
 
 func (b *BitGo) clone() *BitGo {
@@ -70,9 +77,11 @@ func (b *BitGo) get(url string, params interface{}, responce interface{}) (err e
 }
 
 func (b *BitGo) modify(method string, url string, params interface{}, responce interface{}) (err error) {
-	var body *bytes.Buffer
+	var req *http.Request
 
 	if params != nil {
+		var body *bytes.Buffer
+
 		_, err = valid.ValidateStruct(params)
 		if err != nil {
 			return
@@ -83,15 +92,17 @@ func (b *BitGo) modify(method string, url string, params interface{}, responce i
 		if err != nil {
 			return
 		}
-	}
+		req, err = http.NewRequest(method, b.host+"/"+url, body)
+		if err != nil {
+			return
+		}
 
-	req, err := http.NewRequest(method, b.host+"/"+url, body)
-	if err != nil {
-		return
-	}
-
-	if body != nil {
 		req.Header.Add("Content-Type", "application/json")
+	} else {
+		req, err = http.NewRequest(method, b.host+"/"+url, nil)
+		if err != nil {
+			return
+		}
 	}
 
 	return b.request(req, responce)

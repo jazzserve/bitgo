@@ -1,8 +1,8 @@
 package bitgo
 
-import (
-	"testing"
-)
+//	"testing"
+
+/*
 
 // List Wallet Transfers
 
@@ -11,8 +11,7 @@ func TestListWalletTransfers(t *testing.T) {
 		Limit: 5,
 	})
 	if err != nil {
-		t.Error(err.Error())
-		return
+		t.Fatal(err.Error())
 	}
 }
 
@@ -21,8 +20,7 @@ func TestListWalletTransfers(t *testing.T) {
 func TestGetWalletTransfer(t *testing.T) {
 	_, err := coin.GetWalletTransfer(walletId, transferId)
 	if err != nil {
-		t.Error(err.Error())
-		return
+		t.Fatal(err.Error())
 	}
 }
 
@@ -30,13 +28,10 @@ func TestGetWalletTransfer(t *testing.T) {
 
 func TestGetWalletTransferBySequenceID(t *testing.T) {
 	// TODO
-	/*
 		_, err := coin.GetWalletTransferBySequenceID(walletId, sequenceId)
 		if err != nil {
-			t.Error(err.Error())
-			return
+			t.Fatal(err.Error())
 		}
-	*/
 }
 
 // Create Wallet Address
@@ -49,8 +44,7 @@ func TestCreateWalletAddress(t *testing.T) {
 		Label: newLabel,
 	})
 	if err != nil {
-		t.Error(err.Error())
-		return
+		t.Fatal(err.Error())
 	}
 }
 
@@ -59,8 +53,7 @@ func TestCreateWalletAddress(t *testing.T) {
 func TestGetWalletAddress(t *testing.T) {
 	_, err := coin.GetWalletAddress(walletId, address)
 	if err != nil {
-		t.Error(err.Error())
-		return
+		t.Fatal(err.Error())
 	}
 }
 
@@ -73,8 +66,7 @@ func TestUpdateWalletAddress(t *testing.T) {
 		Label: newLabel,
 	})
 	if err != nil {
-		t.Error(err.Error())
-		return
+		t.Fatal(err.Error())
 	}
 }
 
@@ -85,8 +77,7 @@ func TestSendTransaction(t *testing.T) {
 		Otp: "0000000",
 	})
 	if err != nil {
-		t.Error(err.Error())
-		return
+		t.Fatal(err.Error())
 	}
 
 	_, err = coin.SendTransaction(walletId, SendParams{
@@ -95,8 +86,7 @@ func TestSendTransaction(t *testing.T) {
 		WalletPassphrase: passphrase,
 	})
 	if err != nil {
-		t.Error(err.Error())
-		return
+		t.Fatal(err.Error())
 	}
 }
 
@@ -107,8 +97,7 @@ func TestSendTransactionToMany(t *testing.T) {
 		Otp: "0000000",
 	})
 	if err != nil {
-		t.Error(err.Error())
-		return
+		t.Fatal(err.Error())
 	}
 
 	_, err = coin.SendTransactionToMany(walletId, SendToManyParams{
@@ -121,7 +110,8 @@ func TestSendTransactionToMany(t *testing.T) {
 		WalletPassphrase: passphrase,
 	})
 	if err != nil {
-		t.Error(err.Error())
-		return
+		t.Fatal(err.Error())
 	}
 }
+
+*/
