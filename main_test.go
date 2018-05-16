@@ -24,6 +24,7 @@ var (
 	transferId string
 	sequenceId string
 	passphrase string
+	email      string
 )
 
 func init() {
@@ -37,6 +38,7 @@ func init() {
 	address = os.Getenv("ADDRESS")
 	transferId = os.Getenv("TRANSFER_ID")
 	sequenceId = os.Getenv("SEQUENCE_ID")
+	email = os.Getenv("EMAIL")
 	passphrase = os.Getenv("PASSPHRASE")
 
 	b = New(env, token)

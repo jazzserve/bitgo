@@ -5,7 +5,7 @@ package bitgo
 // Unlock
 
 type UnlockParams struct {
-	Otp      string `json:"otp"`
+	Otp      string `json:"otp" valid:"required"`
 	Duration int    `json:"duration,omitempty"`
 }
 

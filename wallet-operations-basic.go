@@ -165,10 +165,10 @@ func (b *BitGo) UpdateWalletAddress(walletId string, addressOrId string, params 
 // Send Transaction
 
 type SendParams struct {
-	Address string `json:"address"`
-	Amount  int    `json:"amount"`
+	Address string `json:"address" valid:"required"`
+	Amount  int    `json:"amount" valid:"required"`
 
-	WalletPassphrase string `json:"walletPassphrase"`
+	WalletPassphrase string `json:"walletPassphrase" valid:"required"`
 	Prv              string `json:"prv,omitempty"`
 	NumBlocks        int    `json:"numBlocks,omitempty"`
 	FeeRate          int    `json:"feeRate,omitempty"`
@@ -201,15 +201,15 @@ func (b *BitGo) SendTransaction(walletId string, params SendParams) (transaction
 // Send Transaction to Many
 
 type Recipient struct {
-	Address  string `json:"address"`
-	Amount   int    `json:"amount"`
+	Address  string `json:"address" valid:"required"`
+	Amount   int    `json:"amount" valid:"required"`
 	GasPrice int    `json:"gasPrice,omitempty"`
 }
 
 type SendToManyParams struct {
-	Recipients []Recipient `json:"recipients"`
+	Recipients []Recipient `json:"recipients" valid:"required"`
 
-	WalletPassphrase string `json:"walletPassphrase"`
+	WalletPassphrase string `json:"walletPassphrase" valid:"required"`
 	Prv              string `json:"prv,omitempty"`
 	NumBlocks        int    `json:"numBlocks,omitempty"`
 	FeeRate          int    `json:"feeRate,omitempty"`

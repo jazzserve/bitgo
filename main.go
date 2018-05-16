@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"time"
 
+	valid "github.com/asaskevich/govalidator"
 	"github.com/google/go-querystring/query"
 )
 
@@ -51,6 +52,11 @@ func (b *BitGo) Coin(coin string) *BitGo {
 
 func (b *BitGo) get(url string, params interface{}, responce interface{}) (err error) {
 	if params != nil {
+		_, err = valid.ValidateStruct(params)
+		if err != nil {
+			return
+		}
+
 		v, _ := query.Values(params)
 		url = url + "?" + v.Encode()
 	}
@@ -67,6 +73,11 @@ func (b *BitGo) modify(method string, url string, params interface{}, responce i
 	var body *bytes.Buffer
 
 	if params != nil {
+		_, err = valid.ValidateStruct(params)
+		if err != nil {
+			return
+		}
+
 		body = new(bytes.Buffer)
 		err = json.NewEncoder(body).Encode(params)
 		if err != nil {

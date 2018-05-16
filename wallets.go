@@ -145,8 +145,8 @@ func (b *BitGo) ListWallets(params *ListParams) (list ListWallets, err error) {
 // Generate Wallet
 
 type GenerateWalletParams struct {
-	Label                           string `json:"label"`
-	Passphrase                      string `json:"passphrase"`
+	Label                           string `json:"label" valid:"required"`
+	Passphrase                      string `json:"passphrase" valid:"required"`
 	UserKey                         string `json:"userKey,omitempty"`
 	BackupXpub                      string `json:"backupXpub,omitempty"`
 	BackupXpubProvider              string `json:"backupXpubProvider,omitempty"`
