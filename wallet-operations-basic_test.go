@@ -1,13 +1,15 @@
 package bitgo
 
-//	"testing"
-
-/*
+import (
+	"testing"
+)
 
 // List Wallet Transfers
 
 func TestListWalletTransfers(t *testing.T) {
-	_, err := coin.ListWalletTransfers(walletId, &ListParams{
+	coin, params := getTestCoin(t)
+
+	_, err := coin.ListWalletTransfers(params.WalletId, &ListParams{
 		Limit: 5,
 	})
 	if err != nil {
@@ -18,7 +20,9 @@ func TestListWalletTransfers(t *testing.T) {
 // Get Wallet Transfer
 
 func TestGetWalletTransfer(t *testing.T) {
-	_, err := coin.GetWalletTransfer(walletId, transferId)
+	coin, params := getTestCoin(t)
+
+	_, err := coin.GetWalletTransfer(params.WalletId, params.TransferId)
 	if err != nil {
 		t.Fatal(err.Error())
 	}
@@ -26,20 +30,26 @@ func TestGetWalletTransfer(t *testing.T) {
 
 // Get Wallet Transfer By Sequence ID
 
+/*
+
 func TestGetWalletTransferBySequenceID(t *testing.T) {
 	// TODO
-		_, err := coin.GetWalletTransferBySequenceID(walletId, sequenceId)
-		if err != nil {
-			t.Fatal(err.Error())
-		}
+	_, err := coin.GetWalletTransferBySequenceID(walletId, sequenceId)
+	if err != nil {
+		t.Fatal(err.Error())
+	}
 }
+
+*/
 
 // Create Wallet Address
 
 func TestCreateWalletAddress(t *testing.T) {
+	coin, params := getTestCoin(t)
+
 	newLabel := randStringRunes(5)
 
-	_, err := coin.CreateWalletAddress(walletId, &AddressParams{
+	_, err := coin.CreateWalletAddress(params.WalletId, &AddressParams{
 		Chain: 0,
 		Label: newLabel,
 	})
@@ -51,7 +61,9 @@ func TestCreateWalletAddress(t *testing.T) {
 // Get Wallet Address
 
 func TestGetWalletAddress(t *testing.T) {
-	_, err := coin.GetWalletAddress(walletId, address)
+	coin, params := getTestCoin(t)
+
+	_, err := coin.GetWalletAddress(params.WalletId, params.Address)
 	if err != nil {
 		t.Fatal(err.Error())
 	}
@@ -60,9 +72,11 @@ func TestGetWalletAddress(t *testing.T) {
 // Update Wallet Address
 
 func TestUpdateWalletAddress(t *testing.T) {
+	coin, params := getTestCoin(t)
+
 	newLabel := randStringRunes(5)
 
-	_, err := coin.UpdateWalletAddress(walletId, address, UpdateWalletAddressParams{
+	_, err := coin.UpdateWalletAddress(params.WalletId, params.Address, UpdateWalletAddressParams{
 		Label: newLabel,
 	})
 	if err != nil {
@@ -73,17 +87,19 @@ func TestUpdateWalletAddress(t *testing.T) {
 // Send Transaction
 
 func TestSendTransaction(t *testing.T) {
-	err := b.Unlock(UnlockParams{
+	coin, params := getTestCoin(t)
+
+	err := coin.Unlock(UnlockParams{
 		Otp: "0000000",
 	})
 	if err != nil {
 		t.Fatal(err.Error())
 	}
 
-	_, err = coin.SendTransaction(walletId, SendParams{
-		Address:          address,
+	_, err = coin.SendTransaction(params.WalletId, SendParams{
+		Address:          params.Address,
 		Amount:           0.0001 * 1e8,
-		WalletPassphrase: passphrase,
+		WalletPassphrase: params.Passphrase,
 	})
 	if err != nil {
 		t.Fatal(err.Error())
@@ -93,25 +109,25 @@ func TestSendTransaction(t *testing.T) {
 // Send Transaction to Many
 
 func TestSendTransactionToMany(t *testing.T) {
-	err := b.Unlock(UnlockParams{
+	coin, params := getTestCoin(t)
+
+	err := coin.Unlock(UnlockParams{
 		Otp: "0000000",
 	})
 	if err != nil {
 		t.Fatal(err.Error())
 	}
 
-	_, err = coin.SendTransactionToMany(walletId, SendToManyParams{
+	_, err = coin.SendTransactionToMany(params.WalletId, SendToManyParams{
 		Recipients: []Recipient{
 			Recipient{
-				Address: address,
+				Address: params.Address,
 				Amount:  0.0001 * 1e8,
 			},
 		},
-		WalletPassphrase: passphrase,
+		WalletPassphrase: params.Passphrase,
 	})
 	if err != nil {
 		t.Fatal(err.Error())
 	}
 }
-
-*/
