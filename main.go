@@ -30,12 +30,12 @@ func New(env string, token string) (b *BitGo, err error) {
 	}
 	switch env {
 	case "test":
-		env = "https://test.bitgo.com/api/v2"
+		env = "https://test.bitgo.com"
 	case "prod":
-		env = "https://www.bitgo.com/api/v2"
+		env = "https://www.bitgo.com"
 	}
 	return &BitGo{
-		host:  env,
+		host:  env + "/api/v2",
 		token: token,
 	}, nil
 }
