@@ -9,7 +9,7 @@ import (
 func TestListWalletTransfers(t *testing.T) {
 	coin, params := getTestCoin(t)
 
-	_, err := coin.ListWalletTransfers(params.WalletId, &ListParams{
+	_, err := coin.ListWalletTransfers(params.WalletId, ListParams{
 		Limit: 5,
 	})
 	if err != nil {

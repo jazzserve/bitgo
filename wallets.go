@@ -133,7 +133,7 @@ type GeneratedWallet struct {
 
 // List Wallets
 
-func (b *BitGo) ListWallets(params *ListParams) (list ListWallets, err error) {
+func (b *BitGo) ListWallets(params ListParams) (list ListWallets, err error) {
 	err = b.get(
 		fmt.Sprintf("%s/wallet",
 			b.coin),
@@ -171,7 +171,7 @@ type GetWalletParams struct {
 	AllTokens bool `url:"allTokens,omitempty"`
 }
 
-func (b *BitGo) GetWallet(walletId string, params *GetWalletParams) (wallet Wallet, err error) {
+func (b *BitGo) GetWallet(walletId string, params GetWalletParams) (wallet Wallet, err error) {
 	err = b.get(
 		fmt.Sprintf("%s/wallet/%s",
 			b.coin,

@@ -79,7 +79,7 @@ type TransactionDescription struct {
 
 // List Wallet Transfers
 
-func (b *BitGo) ListWalletTransfers(walletId string, params *ListParams) (list TransferList, err error) {
+func (b *BitGo) ListWalletTransfers(walletId string, params ListParams) (list TransferList, err error) {
 	err = b.get(
 		fmt.Sprintf("%s/wallet/%s/transfer",
 			b.coin,

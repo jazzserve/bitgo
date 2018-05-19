@@ -9,7 +9,7 @@ import (
 func TestListWallets(t *testing.T) {
 	coin, _ := getTestCoin(t)
 
-	_, err := coin.ListWallets(&ListParams{
+	_, err := coin.ListWallets(ListParams{
 		Limit:     3,
 		AllTokens: true,
 	})
@@ -39,7 +39,7 @@ func TestGenerateWallet(t *testing.T) {
 func TestGetWallet(t *testing.T) {
 	coin, params := getTestCoin(t)
 
-	_, err := coin.GetWallet(params.WalletId, &GetWalletParams{
+	_, err := coin.GetWallet(params.WalletId, GetWalletParams{
 		AllTokens: true,
 	})
 	if err != nil {

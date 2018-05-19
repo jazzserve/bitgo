@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"time"
 
@@ -13,9 +14,11 @@ import (
 )
 
 type BitGo struct {
-	host  string
-	token string
-	coin  string
+	debug   bool
+	timeout time.Duration
+	host    string
+	token   string
+	coin    string
 }
 
 type ListParams struct {
@@ -24,7 +27,7 @@ type ListParams struct {
 	AllTokens bool   `url:"allTokens,omitempty"`
 }
 
-func New(env string, token string) (b *BitGo, err error) {
+func New(env string, token string, timeout time.Duration) (b *BitGo, err error) {
 	if env == "" {
 		return nil, errors.New("empty env")
 	}
@@ -35,22 +38,31 @@ func New(env string, token string) (b *BitGo, err error) {
 		env = "https://www.bitgo.com"
 	}
 	return &BitGo{
-		host:  env + "/api/v2",
-		token: token,
+		host:    env + "/api/v2",
+		token:   token,
+		timeout: timeout,
 	}, nil
 }
 
 func (b *BitGo) clone() *BitGo {
 	return &BitGo{
-		host:  b.host,
-		token: b.token,
-		coin:  b.coin,
+		host:    b.host,
+		token:   b.token,
+		coin:    b.coin,
+		timeout: b.timeout,
+		debug:   b.debug,
 	}
 }
 
 func (b *BitGo) Coin(coin string) *BitGo {
 	c := b.clone()
 	c.coin = coin
+	return c
+}
+
+func (b *BitGo) Debug(debug bool) *BitGo {
+	c := b.clone()
+	c.debug = debug
 	return c
 }
 
@@ -117,7 +129,11 @@ func (b *BitGo) request(req *http.Request, responce interface{}) (err error) {
 	req.Header.Add("Authorization", "Bearer "+b.token)
 
 	client := &http.Client{
-		Timeout: time.Minute,
+		Timeout: b.timeout,
+	}
+
+	if b.debug {
+		log.Println(req.Method, req.URL.EscapedPath())
 	}
 
 	r, err := client.Do(req)
@@ -140,6 +156,10 @@ func (b *BitGo) request(req *http.Request, responce interface{}) (err error) {
 		}
 
 		return berr
+	}
+
+	if b.debug {
+		log.Println(r.Status, string(resp))
 	}
 
 	err = json.Unmarshal(resp, &responce)
