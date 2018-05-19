@@ -15,7 +15,6 @@ func testLogin(t *testing.T, b *BitGo, params *TestParams) {
 	}
 }
 
-/*
 // Current User Profile
 
 func TestCurrentUserProfile(t *testing.T) {
@@ -42,8 +41,6 @@ func TestSessionInformation(t *testing.T) {
 	}
 }
 
-*/
-
 // Lock
 
 func TestLock(t *testing.T) {
@@ -68,10 +65,7 @@ func TestUnlock(t *testing.T) {
 	}
 }
 
-/*
-
 // Login
-
 
 func TestLogin(t *testing.T) {
 	b, params := getTestBitGo(t)
@@ -91,4 +85,3 @@ func TestLogout(t *testing.T) {
 		t.Fatal(err.Error())
 	}
 }
-*/
