@@ -51,7 +51,7 @@ func getTestBitGo(t *testing.T) (b *BitGo, params *TestParams) {
 		t.Fatal(err)
 	}
 
-	return b.Debug(true), params
+	return b.Debug(false), params
 }
 
 func getTestCoin(t *testing.T) (coin *BitGo, params *TestParams) {
