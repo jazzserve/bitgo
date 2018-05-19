@@ -27,7 +27,7 @@ type ListParams struct {
 	AllTokens bool   `url:"allTokens,omitempty"`
 }
 
-func New(env string, token string, timeout time.Duration) (b *BitGo, err error) {
+func New(env string, timeout time.Duration) (b *BitGo, err error) {
 	if env == "" {
 		return nil, errors.New("empty env")
 	}
@@ -39,7 +39,6 @@ func New(env string, token string, timeout time.Duration) (b *BitGo, err error) 
 	}
 	return &BitGo{
 		host:    env + "/api/v2",
-		token:   token,
 		timeout: timeout,
 	}, nil
 }
@@ -52,6 +51,12 @@ func (b *BitGo) clone() *BitGo {
 		timeout: b.timeout,
 		debug:   b.debug,
 	}
+}
+
+func (b *BitGo) Token(token string) *BitGo {
+	c := b.clone()
+	c.token = token
+	return c
 }
 
 func (b *BitGo) Coin(coin string) *BitGo {

@@ -46,12 +46,12 @@ func getTestParams() (params *TestParams) {
 func getTestBitGo(t *testing.T) (b *BitGo, params *TestParams) {
 	params = getTestParams()
 
-	b, err := New(params.Env, params.Token, time.Minute*5)
+	b, err := New(params.Env, time.Minute*5)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	return b.Debug(false), params
+	return b.Token(params.Token).Debug(false), params
 }
 
 func getTestCoin(t *testing.T) (coin *BitGo, params *TestParams) {
