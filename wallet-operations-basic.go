@@ -70,6 +70,14 @@ type Address struct {
 	CoinSpecific struct {
 		RedeemScript string `json:"redeemScript"`
 	} `json:"coinSpecific"`
+	Label   string `json:"label"`
+	Balance struct {
+		Updated       time.Time `json:"updated"`
+		NumTx         int       `json:"numTx"`
+		NumUnspents   int       `json:"numUnspents"`
+		TotalReceived int       `json:"totalReceived"`
+		TotalSent     int       `json:"totalSent"`
+	} `json:"balance"`
 }
 
 type TransactionDescription struct {
