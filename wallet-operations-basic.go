@@ -173,8 +173,8 @@ func (b *BitGo) UpdateWalletAddress(walletId string, addressOrId string, params 
 // Send Transaction
 
 type SendParams struct {
-	Address string `json:"address" valid:"required"`
-	Amount  int    `json:"amount" valid:"required"`
+	Address string  `json:"address" valid:"required"`
+	Amount  float64 `json:"amount" valid:"required"`
 
 	WalletPassphrase string `json:"walletPassphrase" valid:"required"`
 	Prv              string `json:"prv,omitempty"`
