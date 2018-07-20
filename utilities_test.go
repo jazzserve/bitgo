@@ -2,8 +2,6 @@ package bitgo
 
 import (
 	"testing"
-
-	"fmt"
 )
 
 // Estimate Transaction Fees
@@ -11,7 +9,7 @@ import (
 func TestEstimateTransactionFees(t *testing.T) {
 	coin, _ := getTestCoin(t)
 
-	a, err := coin.EstimateTransactionFees(2)
+	_, err := coin.EstimateTransactionFees(2)
 	if err != nil {
 		t.Fatal(err.Error())
 	}
