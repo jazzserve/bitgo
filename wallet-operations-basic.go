@@ -124,10 +124,17 @@ func (b *BitGo) GetWalletTransferBySequenceID(walletId string, sequenceId string
 }
 
 // Create Wallet Address
+type ForwarderVersionType int
+
+const (
+	FORWARDER_VERSION_0 ForwarderVersionType = 0
+	FORWARDER_VERSION_1                      = 1
+)
 
 type AddressParams struct {
-	Chain int    `json:"chain,omitempty"`
-	Label string `json:"label,omitempty"`
+	Chain            int                  `json:"chain,omitempty"`
+	Label            string               `json:"label,omitempty"`
+	ForwarderVersion ForwarderVersionType `json:"forwarderVersion,omitempty"`
 }
 
 func (b *BitGo) CreateWalletAddress(walletId string, params *AddressParams) (address Address, err error) {
@@ -174,7 +181,7 @@ func (b *BitGo) UpdateWalletAddress(walletId string, addressOrId string, params 
 
 type SendParams struct {
 	Address string `json:"address" valid:"required"`
-	Amount  int    `json:"amount" valid:"required"`
+	Amount  string `json:"amount" valid:"required"`
 
 	WalletPassphrase string `json:"walletPassphrase" valid:"required"`
 	Prv              string `json:"prv,omitempty"`
